@@ -25,22 +25,12 @@ public class ChangeDataType {
     @Autowired
     public
     EncodeDecodeStringToDataType stringTypeConvert;
-    @Qualifier("encodeDecodeStringToBase64")
-    @Autowired
-    public
-    EncodeDecodeStringToDataType typeWantConvert;
-    public void init(String stringTypeConvert, String typeWantConvert){
+    public void init(String stringTypeConvert){
         switch (stringTypeConvert) {
             case "base64" -> this.stringTypeConvert = new EncodeDecodeStringToBase64();
             case "hex" -> this.stringTypeConvert = new EncodeDecodeStringToHex();
             case "byte" -> this.stringTypeConvert = new EncodeDecodeStringToByte();
             case "string" -> this.stringTypeConvert = new EncodeDecodeStringToString();
-        }
-        switch (typeWantConvert) {
-            case "base64" -> this.typeWantConvert = new EncodeDecodeStringToBase64();
-            case "hex" -> this.typeWantConvert = new EncodeDecodeStringToHex();
-            case "byte" -> this.typeWantConvert = new EncodeDecodeStringToByte();
-            case "string" -> this.typeWantConvert = new EncodeDecodeStringToString();
         }
 
     }

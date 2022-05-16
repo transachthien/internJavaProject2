@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class ChangeDataTypeController {
-//    @Autowired
-//    private ChangeDataTypeService changeDataTypeService;
     @Autowired
     private ChangDataTypeService2 changDataTypeService2;
         @GetMapping("/changeData")
@@ -24,11 +22,7 @@ public class ChangeDataTypeController {
         if (text.length()==0||stringTypeConvert.length()==0||typeWantConvert.length()==0){
             return "Text not null or choose type to convert";
         }
-        ChangeDataType changeDataType = new ChangeDataType();
-        changeDataType.init(stringTypeConvert,typeWantConvert);
-        changDataTypeService2 = new ChangDataTypeService2(changeDataType);
-        return changDataTypeService2.changeData(text);
-//        return changeDataTypeService.changedata(text,stringTypeConvert,typeWantConvert);
+        return changDataTypeService2.changeData(text,stringTypeConvert,typeWantConvert);
     }
 
 }

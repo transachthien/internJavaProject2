@@ -5,23 +5,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ChangDataTypeService2 {
-    private final ChangeDataType changeDataType;
 
-    public ChangDataTypeService2(ChangeDataType changeDataType) {
-        this.changeDataType = changeDataType;
-    }
-    public String changeData(String text){
+
+    public String changeData(String text,String stringTypeConvert, String typeWantConvert){
+        ChangeDataType encodeStringTypeConvert = new ChangeDataType();
+        encodeStringTypeConvert.init(stringTypeConvert);
+        ChangeDataType decodeTypeWantConvert = new ChangeDataType();
+        decodeTypeWantConvert.init(typeWantConvert);
+
         try {
-             text = changeDataType.stringTypeConvert.encodeToString(text);
+             text = encodeStringTypeConvert.stringTypeConvert.encodeToString(text);
         }catch (Exception e){
             return e.getMessage();
         }
         try {
-            return changeDataType.typeWantConvert.decodeToDataType(text);
+            return decodeTypeWantConvert.stringTypeConvert.decodeToDataType(text);
         }catch (Exception e){
             return e.getMessage();
         }
-
     }
 
 }
