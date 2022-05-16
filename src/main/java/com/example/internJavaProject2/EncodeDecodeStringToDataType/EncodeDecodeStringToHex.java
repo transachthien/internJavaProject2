@@ -2,14 +2,14 @@ package com.example.internJavaProject2.EncodeDecodeStringToDataType;
 
 import com.example.internJavaProject2.InterfaceClass.EncodeDecodeStringToDataType;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.HexFormat;
 @Slf4j
-@Service
+@Component
 public class EncodeDecodeStringToHex implements EncodeDecodeStringToDataType {
     @Override
     public String encodeToString(String string) {

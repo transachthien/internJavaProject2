@@ -1,15 +1,15 @@
 package com.example.internJavaProject2.EncodeDecodeStringToDataType;
-
 import com.example.internJavaProject2.InterfaceClass.EncodeDecodeStringToDataType;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Component;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 @Slf4j
-@Service
+@Component
+
 public class EncodeDecodeStringToBase64 implements EncodeDecodeStringToDataType {
+
     @Override
     public String encodeToString(String string) {
         Base64.Decoder dec = Base64.getDecoder();

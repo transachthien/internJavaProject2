@@ -1,28 +1,36 @@
 package com.example.internJavaProject2.controller;
 
 import com.example.internJavaProject2.Service.ChangDataTypeService2;
-import com.example.internJavaProject2.Adapter.ChangeDataType;
-//import com.example.internJavaProject2.Service.ChangeDataTypeService;
+import com.example.internJavaProject2.Service.Contact;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.UnsupportedEncodingException;
+
 @Slf4j
 @RestController
 @RequestMapping("/api")
 public class ChangeDataTypeController {
     @Autowired
     private ChangDataTypeService2 changDataTypeService2;
-        @GetMapping("/changeData")
-    public String changeData(@RequestParam("text") String text, @RequestParam("stringTypeConvert") String stringTypeConvert,@RequestParam("typeWantConvert") String typeWantConvert) {
-         text = text.replaceAll("\\s\\s+", " ").trim();
 
-        if (stringTypeConvert.equals(typeWantConvert)){
-            return "error to convert same Type";
+    @PostMapping("/convert")
+    public ResponseEntity<Contact> changeData(@RequestBody Contact contact) {
+        if (contact.getStringTypeConvert().equals(contact.getTypeWantConvert())) {
+            contact.setKq("error to convert same Type");
+            return new ResponseEntity<>(contact, HttpStatus.OK);
         }
-        if (text.length()==0||stringTypeConvert.length()==0||typeWantConvert.length()==0){
-            return "Text not null or choose type to convert";
+        //them validate
+        if (contact.getText().length() == 0 || contact.getStringTypeConvert().length() == 0 || contact.getTypeWantConvert().length() == 0) {
+            contact.setKq("Text not null or choose type to convert");
+            return new ResponseEntity<>(contact, HttpStatus.OK);
         }
-        return changDataTypeService2.changeData(text,stringTypeConvert,typeWantConvert);
+        contact.setKq(changDataTypeService2.changeData(contact.getText(), contact.getStringTypeConvert(),
+                contact.getTypeWantConvert()));
+        return new ResponseEntity<>(contact, HttpStatus.OK);
     }
 
 }

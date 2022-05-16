@@ -1,28 +1,38 @@
 package com.example.internJavaProject2.Service;
 
 import com.example.internJavaProject2.Adapter.ChangeDataType;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
+@Service
 public class ChangDataTypeService2 {
+    // bị lặp lại ChangeDataType gọi cả 2 kiểu
+    public String changeData(String text, String stringTypeConvert, String typeWantConvert) {
 
+        ChangeDataType encodeStringTypeConvert = new ChangeDataType(stringTypeConvert, typeWantConvert);
+        if (Arrays.asList(encodeStringTypeConvert.getListConvertType()).contains(stringTypeConvert) == false
+                || Arrays.asList(encodeStringTypeConvert.getListConvertType()).contains(typeWantConvert) ==false) {
+            return "Type not support";
 
-    public String changeData(String text,String stringTypeConvert, String typeWantConvert){
-        ChangeDataType encodeStringTypeConvert = new ChangeDataType();
-        encodeStringTypeConvert.init(stringTypeConvert);
-        ChangeDataType decodeTypeWantConvert = new ChangeDataType();
-        decodeTypeWantConvert.init(typeWantConvert);
+        }
 
         try {
-             text = encodeStringTypeConvert.stringTypeConvert.encodeToString(text);
-        }catch (Exception e){
+            text = encodeStringTypeConvert.getStringTypeConvert().encodeToString(text);
+        } catch (Exception e) {
             return e.getMessage();
         }
         try {
-            return decodeTypeWantConvert.stringTypeConvert.decodeToDataType(text);
-        }catch (Exception e){
+            return encodeStringTypeConvert.getTypeWantConvert().decodeToDataType(text);
+        } catch (Exception e) {
             return e.getMessage();
         }
+    }
+    public String decode(String value) throws UnsupportedEncodingException {
+        return URLDecoder.decode(value, StandardCharsets.UTF_8.toString());
     }
 
 }

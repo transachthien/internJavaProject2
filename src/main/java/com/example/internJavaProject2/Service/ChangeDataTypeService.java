@@ -14,7 +14,7 @@ public class ChangeDataTypeService {
     public ConvertToString convertToString;
     @Autowired
     public ConvertStringToDataType convertStringToDataType;
-    public String changedata(String text,String StringTypeConvert, String TypeWantConvert) throws UnsupportedEncodingException {
+    public String changeData(String text, String StringTypeConvert, String TypeWantConvert) throws UnsupportedEncodingException {
         String stringToConvert;
         String result;
         if(StringTypeConvert.equals(TypeWantConvert)){
