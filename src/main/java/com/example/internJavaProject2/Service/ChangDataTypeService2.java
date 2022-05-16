@@ -10,18 +10,20 @@ public class ChangDataTypeService2 {
     public ChangDataTypeService2(ChangeDataType changeDataType) {
         this.changeDataType = changeDataType;
     }
-    public String changeData(String text){
+    public String encodeData(String text){
         try {
-             text = changeDataType.stringTypeConvert.encodeToString(text);
+             return changeDataType.stringTypeConvert.encodeToString(text);
         }catch (Exception e){
             return e.getMessage();
         }
-        try {
-            return changeDataType.typeWantConvert.decodeToDataType(text);
-        }catch (Exception e){
-            return e.getMessage();
-        }
-
     }
+    public String decodeData(String text){
+        try {
+            return changeDataType.stringTypeConvert.decodeToDataType(text);
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
 
 }

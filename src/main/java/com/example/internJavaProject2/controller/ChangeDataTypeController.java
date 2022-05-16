@@ -25,10 +25,12 @@ public class ChangeDataTypeController {
             return "Text not null or choose type to convert";
         }
         ChangeDataType changeDataType = new ChangeDataType();
-        changeDataType.init(stringTypeConvert,typeWantConvert);
+        changeDataType.init(stringTypeConvert);
         changDataTypeService2 = new ChangDataTypeService2(changeDataType);
-        return changDataTypeService2.changeData(text);
-//        return changeDataTypeService.changedata(text,stringTypeConvert,typeWantConvert);
+        text =  changDataTypeService2.encodeData(text);
+        changeDataType.init(typeWantConvert);
+        changDataTypeService2 = new ChangDataTypeService2(changeDataType);
+        return changDataTypeService2.decodeData(text);
     }
 
 }
